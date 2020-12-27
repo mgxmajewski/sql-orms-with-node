@@ -21,6 +21,15 @@ const { Movie, Person } = db.models;
     });
     console.log(movie2.toJSON());
 
+    const movie3 = await Movie.build({
+      title: 'Toy Story 3',
+      runtime: 103,
+      releaseDate: '2010-06-18',
+      isAvailableOnVHS: false,
+    });
+    await movie3.save(); // save the record
+    console.log(movie3.toJSON());
+
     const person1 = await Person.create({
       firstName: 'Michal',
       lastName: 'Majewski'
