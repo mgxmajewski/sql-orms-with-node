@@ -16,17 +16,22 @@ Movie.init({
   await sequelize.sync({ force: true });
 
   try {
+    // Instance of the Movie class represents a database row
+    const movie = await Movie.create({
+      title: 'Toy Story',
+    });
 
   } catch (error) {
     console.error('Error connecting to the database: ', error);
   }
 })();
 
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection to the database successful!');
-  } catch (error) {
-    console.error('Error connecting to the database: ', error);
-  }
-})();
+
+// (async () => {
+//   try {
+//     await sequelize.authenticate();
+//     console.log('Connection to the database successful!');
+//   } catch (error) {
+//     console.error('Error connecting to the database: ', error);
+//   }
+// })();
