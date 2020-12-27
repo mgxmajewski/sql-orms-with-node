@@ -26,7 +26,11 @@ module.exports = (sequelize) => {
             validate: {
                 notNull: {
                     msg: 'Please provide a value for "runtime"',
-                }
+                },
+                min: {
+                    args: 1,
+                    msg: 'Please provide a value greater than "0" for "runtime"'
+                },
             },
         },
         releaseDate: {
@@ -35,7 +39,11 @@ module.exports = (sequelize) => {
             validate: {
                 notNull: {
                     msg: 'Please provide a value for "releaseDate"',
-                }
+                },
+                isAfter: {
+                    args: '1895-12-27',
+                    msg: 'Please provide a value on or after "1895-12-28" for "releaseDate"',
+                },
             },
         },
         isAvailableOnVHS: {
