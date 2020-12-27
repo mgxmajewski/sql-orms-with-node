@@ -16,10 +16,16 @@ Movie.init({
   await sequelize.sync({ force: true });
 
   try {
-    // Instance of the Movie class represents a database row
-    const movie = await Movie.create({
-      title: 'Toy Story',
-    });
+    const movieInstances = await Promise.all([
+      Movie.create({
+        title: 'Toy Story'
+      }),
+      Movie.create({
+        title: 'The Incredibles'
+      }),
+    ]);
+    const moviesJSON = movieInstances.map(movie => movie.toJSON());
+    console.log(moviesJSON);
 
   } catch (error) {
     console.error('Error connecting to the database: ', error);
