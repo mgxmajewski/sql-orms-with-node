@@ -86,8 +86,18 @@ const { Op } = db.Sequelize;
       },
       order: [['id', 'DESC']] // IDs in descending order
     });
-// SELECT * FROM Movies WHERE runtime = 92 AND isAvailableOnVHS = true;
     console.log( movies.map(movie => movie.toJSON()) );
+
+    const movies2 = await Movie.findAll({
+      attributes: ['id', 'title', 'releaseDate'],
+      where: {
+        releaseDate: {
+          [Op.gte]: '1995-01-01'
+        }
+      },
+      order: [['releaseDate', 'ASC']], // dates in ascending order
+    });
+    console.log( movies2.map(movie => movie.toJSON()) );
 
 
 
