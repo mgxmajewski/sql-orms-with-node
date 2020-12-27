@@ -52,7 +52,13 @@ module.exports = (sequelize) => {
             defaultValue: false,
             validate: { },
         }
-    }, { sequelize });
+    }, {
+        timestamps: false, // disable timestamps
+        freezeTableName: true, // disable plural table names
+        modelName: 'movie', // set model name to 'movie'; table name will be 'movies'
+        tableName: 'my_movies_table', // table name change
+        sequelize
+    });
 
     return Movie;
 };

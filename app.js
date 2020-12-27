@@ -16,7 +16,7 @@ const { Movie } = db.models;
     const movie2 = await Movie.create({
       title: 'The Incredibles',
       runtime: 115,
-      releaseDate: '2004-04-14',
+      releaseDate: '1895-12-28',
       isAvailableOnVHS: true,
     });
     console.log(movie2.toJSON());
