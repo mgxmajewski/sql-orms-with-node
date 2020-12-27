@@ -10,7 +10,7 @@ const { Op } = db.Sequelize;
       title: 'Toy Story',
       runtime: 81,
       releaseDate: '1995-11-22',
-      isAvailableOnVHS: true,
+      isAvailableOnVHS: false,
     });
     console.log(movie.toJSON());
 
@@ -58,8 +58,12 @@ const { Op } = db.Sequelize;
     });
     console.log(person3.toJSON());
 
+    const pulpFiction = await Movie.findByPk(4);
+    await pulpFiction.destroy();
+
+
 // SELECT 'one' FROM Movies WHERE Pk (primary key) = 4;
-    const movieById = await Movie.findByPk(4);
+    const movieById = await Movie.findByPk(3);
     console.log(movieById.toJSON());
 
 // SELECT 'first met' FROM Movies WHERE runtime = 115;
@@ -99,7 +103,17 @@ const { Op } = db.Sequelize;
     });
     console.log( movies2.map(movie => movie.toJSON()) );
 
+    const toyStory3 = await Movie.findByPk(1);
+    toyStory3.isAvailableOnVHS = true;
+    await toyStory3.save();
+    console.log(toyStory3.get({plain: true}));
 
+    const toyStory4 = await Movie.findByPk(1);
+    await toyStory4.update({
+      title: 'Trinket Tale 3', // new title
+      isAvailableOnVHS: false,
+    },  {fields: ['isAvailableOnVHS']});
+    console.log( toyStory4.get({ plain: true }) );
 
   } catch (error) {
     if (error.name === 'SequelizeValidationError'){
